@@ -13,6 +13,31 @@
 #ifndef FDF_H
 #define FDF_H
 
+typedef struct s_line
+{
+	int	size;
+	t_line	next;
+	t_line	prev;
+}	t_line;
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+	double	z;
+	t_point	next;
+}	t_point;
+
+typedef struct s_cam
+{
+	double	x;
+	double	y;
+	double	z;
+	double	rx;
+	double	ry;
+	double	rz;
+}	t_cam;
+
 typedef struct s_img
 {
 	void	*img;
