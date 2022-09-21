@@ -13,15 +13,11 @@
 #ifndef FDF_H
 #define FDF_H
 
-typedef struct s_line
-{
-	int	size;
-	t_line	next;
-	t_line	prev;
-}	t_line;
-
 typedef struct s_point
 {
+	int		line;
+	int		column;
+	int		value;
 	double	x;
 	double	y;
 	double	z;

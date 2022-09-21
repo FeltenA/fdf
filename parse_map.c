@@ -11,103 +11,60 @@
 /* ************************************************************************** */
 
 void    free_map(int **map);
-int	join_map(int ***map, int *line);
+t_point	*create_point(int line, int column, int value);
 
-int	count_num(char *line)
+int	create_line(t_point **map, char *line, int x)
 {
 	int	i;
 	int	count;
+	t_point	*point;
 
 	i = 0;
 	count = 0;
-	if (line[0] >= '0' && line[0] <= '9')
-		count++;
-	while (line[i] != '\0' && line[i + 1] != '\0')
+	while (line[i])
 	{
-		if (line[i] == ' ' && line[i + 1] >= '0' && line[i + 1] <= '9')
+		if ((!i || line[i - 1] == ' ') && line[i] >= '0' && line[i] <= '9')
+		{
+			point = create_point(x, count, ft_atoi(&(line[i]));
+			if (!point)
+			{
+				free_map(map);
+				return (0);
+			}
+			add_point(map, point);
 			count++;
-		i++;
-	}
-	return (count);
-}
-
-void get_values(char *line, int **num_line)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 1;
-	if (line[0] >= '0' && line[0] <= '9')
-	{
-		(*num_line)[j] = ft_atoi(line[0]);
-		j++;
-	}
-	while (line[i] != '\0' && line[i + 1] != '\0')
-	{
-		if (line == '0' && line[i + 1] >= '0' && line[i + 1] <= '9')
-		{
-			(*num_line)[j] = ft_atoi(line[i + 1]);
-			j++;
 		}
 		i++;
-	}
-}
-
-int *parse_line(int fd)
-{
-	char *line;
-	int	*num_line;
-
-	line = get_next_line(fd);
-	if (!line)
-		return (0);
-	num_line = malloc((count_num(line) + 1) * sizeof(int));
-	if (!num_line)
-	{
-		free(line);
-		return (0);
-	}
-	num_line[0] = count_num(line);
-	get_values(line, &num_line);
-	free(line);
-	return (num_line);
-}
-
-int	convert_map(int ***map, int fd)
-{
-	int	*line;
-
-	line = parse_line(fd);
-	while (line)
-	{
-		if (!join_map(map, line))
-		{
-			free(line);
-			free_map(map);
-			return (0);
-		}
-		free(line);
-		line = parse_line(fd);
 	}
 	return (1);
 }
 
-int	**parse_map(char *file)
+int	convert_map(t_point **map, int fd)
 {
-	int	**map;
-	int	fd;
+	int		x;
+	char	*line;
 
-	fd = open(file, "RD_ONLY");
+	x = 0;
+	line = get_next_line(fd);
+	if (!line)
+		return (0);
+	while (line)
+	{
+		if (!create_line(map, line, x))
+			return (0);
+		line = get_next_line(fd);
+	}
+	return (1);
+}
+
+t_point	*parse_map(char *file)
+{
+	t_line	*map;
+	int		fd;
+
+	fd = open(file, RD_ONLY);
 	if (fd < 0)
 		return (0);
-	map = malloc(sizeof(int *));
-	if (!map)
-	{
-		close(fd);
-		return (0);
-	}
-	map[0] = 0;
 	if (!convert_map(&map, fd))
 	{
 		close(fd);

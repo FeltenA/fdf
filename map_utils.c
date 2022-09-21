@@ -1,37 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afelten <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/21 14:24:58 by afelten           #+#    #+#             */
+/*   Updated: 2022/09/21 14:25:34 by afelten          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-void    free_map(int **map)
+void	free_map(t_point **map)
 {
-    int i;
+	t_point	*save;
 
-    i = 0;
-    while (map[i])
-    {
-        free(map[i]);
-        i++;
-    }
-    free(map);
+	while ((*map))
+	{
+		save = *map;
+		*map = (*map)->next;
+		free(save);
+	}
 }
 
-int	join_map(int ***map, int *line)
+void	add_point(t_point **map, t_point *point)
 {
-	int	count;
-	int **cpy;
+	t_point	*ppoint;
 
-	count = 0;
-	while ((*map)[count])
-		count++;
-	cpy = malloc((count + 1) * sizeof(int *));
-	if (!cpy)
-		return (0);
-	count = 0;
-	while ((*map)[count])
+	if (!(*map))
+		*map = point;
+	else
 	{
-		cpy[count] = (*map)[count];
-		count++;
+		ppoint = *map;
+		while (ppoint->next)
+			ppoint = ppoint->next;
+		ppoint->next = point;
 	}
-	cpy[count] = 0;
-	free(*map);
-	*map = cpy;
-	return (1);
+}
+
+t_point	*create_point(int line, int column, int value)
+{
+	t_point	*point;
+
+	point = malloc(sizeof(t_point));
+	if (!point)
+		return (0);
+	point->line = line;
+	point->column = column;
+	point->value = value;
+	point->x = (double) column;;
+	point->y = (double) line;
+	point->z = (double) value;
+	point->next = 0;
+	return (point);
 }
