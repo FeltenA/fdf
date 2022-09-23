@@ -47,9 +47,9 @@ t_point	*create_point(int line, int column, int value)
 	point->line = line;
 	point->column = column;
 	point->value = value;
-	point->x = (double) column;;
-	point->y = (double) line;
-	point->z = (double) value;
+	point->x = 0;
+	point->y = 0;
+	point->z = 0;
 	point->next = 0;
 	return (point);
 }

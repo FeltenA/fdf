@@ -21,7 +21,7 @@ typedef struct s_point
 	double	x;
 	double	y;
 	double	z;
-	t_point	next;
+	struct s_point	next;
 }	t_point;
 
 typedef struct s_cam
@@ -48,6 +48,13 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 	t_img	img;
+	t_point	*map;
+	t_cam	t_cam;
+	int		width;
+	int		heigth;
+	int		max_z;
+	int		min_z;
+	int		space;
 }	t_data;
 
 #endif
