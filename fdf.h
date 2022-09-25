@@ -47,6 +47,13 @@ typedef struct s_data
 	t_img	img;
 	t_cam	cam;
 	t_point	*map;
+	t_point	*map;
+	t_cam	t_cam;
+	int		width;
+	int		heigth;
+	int		max_z;
+	int		min_z;
+	int		space;
 }	t_data;
 
 #endif
