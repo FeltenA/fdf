@@ -44,10 +44,7 @@ t_point	*create_point(int line, int column, int value)
 	point = malloc(sizeof(t_point));
 	if (!point)
 		return (0);
-	point->line = line;
-	point->column = column;
-	point->value = value;
-	point->x = (double) column;;
+	point->x = (double) column;
 	point->y = (double) line;
 	point->z = (double) value;
 	point->next = 0;
