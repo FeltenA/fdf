@@ -13,11 +13,17 @@
 #ifndef FDF_H
 #define FDF_H
 
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+}	t_pos;
+
 typedef struct s_point
 {
-	double			x;
-	double			y;
-	double			z;
+	int			x;
+	int			y;
+	int			z;
 	struct s_point	next;
 }	t_point;
 
@@ -29,6 +35,7 @@ typedef struct s_cam
 	double	rx;
 	double	ry;
 	double	rz;
+	int		fov;
 }	t_cam;
 
 typedef struct s_img
