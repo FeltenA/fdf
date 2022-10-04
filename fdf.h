@@ -15,8 +15,9 @@
 
 typedef struct s_pos
 {
-	double	x;
-	double	y;
+	int	x;
+	int	y;
+	int		color;
 }	t_pos;
 
 typedef struct s_point

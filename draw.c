@@ -42,12 +42,12 @@ void    draw_map(t_data *data)
     while (start->next)
     {
         if (start->y == start->next->y)
-            draw_line(start, start->next);
+            draw_line(calculate_pos(start, data), calculate_pos(start->next, data));
         if (start->y > 0)
         {
             tmp = get_prev_point(data->map, start);
             if (tmp)
-                draw_line(start, tmp);
+                draw_line(calculate_pos(start, data), calculate_pos(tmp, data));
         }
         start = start->next;
     }
