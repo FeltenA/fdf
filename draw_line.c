@@ -9,8 +9,9 @@
 /*   Updated: 2022/10/24 14:37:11 by afelten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "fdf.h"
 
-void    plot_line_low(t_pos p1, t_pos p2)
+void    plot_line_low(t_pos p1, t_pos p2, t_img *img)
 {
     int dx;
     int dy;
@@ -40,7 +41,7 @@ void    plot_line_low(t_pos p1, t_pos p2)
     }
 }
 
-void    plot_line_high(t_pos p1, t_pos p2)
+void    plot_line_high(t_pos p1, t_pos p2, t_img *img)
 {
     int dx;
     int dy;
@@ -70,20 +71,20 @@ void    plot_line_high(t_pos p1, t_pos p2)
     }
 }
 
-void    draw_line(t_pos p1, t_pos p2)
+void    draw_line(t_pos p1, t_pos p2, t_img *img)
 {
-    if (fabs(p2->y - p1->y) < fabs(p2->x - p1->x))
+    if (fabs(p2.y - p1.y) < fabs(p2.x - p1.x))
     {
-        if (p1->x > p2->x)
-            plot_line_low(p2, p1);
+        if (p1.x > p2.x)
+            plot_line_low(p2, p1, img);
         else
-            plot_line_low(p1, p2);
+            plot_line_low(p1, p2, img);
     }
     else
     {
-        if (p1->y > p2->y)
-            plot_line_high(p2, p1);
+        if (p1.y > p2.y)
+            plot_line_high(p2, p1, img);
         else
-            plot_line_high(p1, p2);
+            plot_line_high(p1, p2, img);
     }
 }

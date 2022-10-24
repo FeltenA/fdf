@@ -15,12 +15,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+t_point	*parse_map(char *file);
+void	init_data(t_data *data);
+void	draw_map(t_data *data, t_img *img);
+
 int	close(int keycode, t_data *data)
 {
 	if (keycode == 65307)
 	{
 		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_image(data->mlx, data->img.img);
+		mlx_destroy_image(data->mlx, data->img->img);
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 		exit(0);
@@ -28,18 +32,31 @@ int	close(int keycode, t_data *data)
 	return (0);
 }
 
+int	create_img(t_data *data)
+{
+	t_img	*img;
+
+	img = malloc(sizeof(t_img));
+	if (!img)
+		return (0);
+	draw_map(data, img);
+	mlx_put_image_to_window(data->mlx, data->win, img->img, 0, 0);
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img->img);
+	data->img = img;
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	(void)argc;
-	(void)argv;
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 900, 800, "fdf");
-	data.img.img = mlx_new_image(data.mlx, 900, 800);
-	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bpp,
-										&data.img.line_len, &data.img.endian);
-	mlx_put_image_to_window(data.mlx, data.win, data.img.img, 0, 0);
+	data.map = parse_map(argv[1]);
+	if (!data.map)
+		return (0);
+	data.width = 900;
+	data.heigth = 800;
+	init_data(&data);
 	mlx_key_hook(data.win, close, &data);
 	mlx_loop(data.mlx);
+	return (1);
 }

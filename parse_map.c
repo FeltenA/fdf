@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <fcntl.h>
 
 void	free_map(int **map);
 t_point	*create_point(int line, int column, int value);
@@ -61,10 +62,10 @@ int	convert_map(t_point **map, int fd)
 
 t_point	*parse_map(char *file)
 {
-	t_line	*map;
+	t_point	*map;
 	int		fd;
 
-	fd = open(file, RD_ONLY);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (0);
 	if (!convert_map(&map, fd))

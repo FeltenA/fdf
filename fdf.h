@@ -52,15 +52,17 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	t_img	img;
+	t_img	*img;
 	t_cam	cam;
-	t_point	*map;
 	t_point	*map;
 	t_cam	t_cam;
 	int		width;
 	int		heigth;
 	int		max_z;
 	int		min_z;
+	int		max_color;
+	int		min_color;
+	double	color_step[3];
 	int		space;
 }	t_data;
 

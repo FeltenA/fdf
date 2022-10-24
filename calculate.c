@@ -12,6 +12,20 @@
 
 #include "fdf.h"
 
+int	calculate_color(int z, t_data *data)
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	double			diff_z;
+
+	diff_z = z - data->min_z;
+	r = round(diff_z * data->color_step[0]);
+	g = round(diff_z * data->color_step[1]);
+	b = round(diff_z * data->color_step[2]);
+	return (*(int *)(unsigned char [4]){b, g, r, 0});
+}
+
 void	rotate_point(double *x, double *y, double *z, t_cam cam)
 {
 	double	result_x;
@@ -39,7 +53,7 @@ t_pos	calculate_pos(t_point *point, t_data *data)
 	x = (double) point->x - data->cam.x;
 	y = (double) point->y - data->cam.y;
 	z = (double) point->z - data->cam.z;
-	result = rotate_point(&x, &y, &z, data->cam);
+	rotate_point(&x, &y, &z, data->cam);
 	x = data->cam.fov / z * x;
 	y = data->cam.fov / z * y;
 	result.x = round(x);
