@@ -6,17 +6,19 @@
 /*   By: afelten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:43:57 by afelten           #+#    #+#             */
-/*   Updated: 2022/09/18 19:54:40 by afelten          ###   ########.fr       */
+/*   Updated: 2022/10/24 14:53:22 by afelten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void    free_map(int **map);
+#include "fdf.h"
+
+void	free_map(int **map);
 t_point	*create_point(int line, int column, int value);
 
 int	create_line(t_point **map, char *line, int x)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
 	t_point	*point;
 
 	i = 0;
@@ -25,7 +27,7 @@ int	create_line(t_point **map, char *line, int x)
 	{
 		if ((!i || line[i - 1] == ' ') && line[i] >= '0' && line[i] <= '9')
 		{
-			point = create_point(x, count, ft_atoi(&(line[i]));
+			point = create_point(x, count, ft_atoi(&(line[i])));
 			if (!point)
 			{
 				free_map(map);
