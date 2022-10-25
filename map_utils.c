@@ -68,7 +68,7 @@ void	add_point(t_point **map, t_point *point)
 	}
 }
 
-t_point	*create_point(int line, int column, int value)
+t_point	*create_point(int column, int line, int value)
 {
 	t_point	*point;
 

@@ -9,7 +9,11 @@
 /*   Updated: 2022/10/24 14:37:11 by afelten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "fdf.h"
+#include <math.h>
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 void    plot_line_low(t_pos p1, t_pos p2, t_img *img)
 {
@@ -71,9 +75,17 @@ void    plot_line_high(t_pos p1, t_pos p2, t_img *img)
     }
 }
 
+int ft_abs(int num)
+{
+    if (num < 0)
+        return (num * -1);
+    return (num);
+}
+#include <stdio.h>
 void    draw_line(t_pos p1, t_pos p2, t_img *img)
 {
-    if (fabs(p2.y - p1.y) < fabs(p2.x - p1.x))
+    printf("x: %d, y: %d\n", p2.x, p2.y);
+    if (ft_abs(p2.y - p1.y) < ft_abs(p2.x - p1.x))
     {
         if (p1.x > p2.x)
             plot_line_low(p2, p1, img);

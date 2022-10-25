@@ -11,21 +11,21 @@
 /* ************************************************************************** */
 
 #ifndef FDF_H
-#define FDF_H
+# define FDF_H
 
 typedef struct s_pos
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	int		color;
 }	t_pos;
 
 typedef struct s_point
 {
-	int			x;
-	int			y;
-	int			z;
-	struct s_point	next;
+	int				x;
+	int				y;
+	int				z;
+	struct s_point	*next;
 }	t_point;
 
 typedef struct s_cam

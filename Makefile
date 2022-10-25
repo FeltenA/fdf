@@ -1,8 +1,16 @@
-SRCS	=	so_long.c
+SRCS	=	fdf.c\
+			init.c\
+			parse_map.c\
+			map_utils.c\
+			draw.c\
+			draw_line.c\
+			calculate.c\
+			get_next_line.c\
+			get_next_line_utils.c
 
 OBJS	= ${SRCS:.c=.o}
 
-NAME	= so_long
+NAME	= fdf
 
 GCC		= gcc
 

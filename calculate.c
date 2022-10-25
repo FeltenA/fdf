@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <math.h>
 
 int	calculate_color(int z, t_data *data)
 {
@@ -42,10 +43,9 @@ void	rotate_point(double *x, double *y, double *z, t_cam cam)
 	*x = result_x;
 	*y = result_y;
 }
-
-t_pos	calculate_pos(t_point *point, t_data *data)
+#include <stdio.h>
+void	calculate_pos(t_point *point, t_data *data, t_pos *pos)
 {
-	t_pos	result;
 	double	x;
 	double	y;
 	double	z;
@@ -56,8 +56,9 @@ t_pos	calculate_pos(t_point *point, t_data *data)
 	rotate_point(&x, &y, &z, data->cam);
 	x = data->cam.fov / z * x;
 	y = data->cam.fov / z * y;
-	result.x = round(x);
-	result.y = round(y);
-	result.color = calculate_color(point->z, data);
-	return (result);
+	printf("x: %lf y: %lf z: %lf\n", x, y, z);
+	pos->x = round(x);
+	pos->y = round(y);
+	pos->color = calculate_color(point->z, data);
+	printf("x: %d y: %d\n", pos->x, pos->y);
 }
