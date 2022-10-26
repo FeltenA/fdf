@@ -13,9 +13,9 @@
 #include "fdf.h"
 #include <math.h>
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *img, t_pos pos, t_data *data);
 
-void    plot_line_low(t_pos p1, t_pos p2, t_img *img)
+void    plot_line_low(t_pos p1, t_pos p2, t_img *img, t_data *data)
 {
     int dx;
     int dy;
@@ -33,7 +33,7 @@ void    plot_line_low(t_pos p1, t_pos p2, t_img *img)
     d = 2 * dy - dx;
     while (p1.x <= p2.x)
     {
-        my_mlx_pixel_put(img, p1.x, p1.y, p1.color);
+        my_mlx_pixel_put(img, p1, data);
         if (d > 0)
         {
             p1.y += i;
@@ -45,7 +45,7 @@ void    plot_line_low(t_pos p1, t_pos p2, t_img *img)
     }
 }
 
-void    plot_line_high(t_pos p1, t_pos p2, t_img *img)
+void    plot_line_high(t_pos p1, t_pos p2, t_img *img, t_data *data)
 {
     int dx;
     int dy;
@@ -63,7 +63,7 @@ void    plot_line_high(t_pos p1, t_pos p2, t_img *img)
     d = 2 * dx - dy;
     while (p1.y <= p2.y)
     {
-        my_mlx_pixel_put(img, p1.x, p1.y, p1.color);
+        my_mlx_pixel_put(img, p1, data);
         if (d > 0)
         {
             p1.x += i;
@@ -82,21 +82,21 @@ int ft_abs(int num)
     return (num);
 }
 #include <stdio.h>
-void    draw_line(t_pos p1, t_pos p2, t_img *img)
+void    draw_line(t_pos p1, t_pos p2, t_img *img, t_data *data)
 {
     printf("x: %d, y: %d\n", p2.x, p2.y);
     if (ft_abs(p2.y - p1.y) < ft_abs(p2.x - p1.x))
     {
         if (p1.x > p2.x)
-            plot_line_low(p2, p1, img);
+            plot_line_low(p2, p1, img, data);
         else
-            plot_line_low(p1, p2, img);
+            plot_line_low(p1, p2, img, data);
     }
     else
     {
         if (p1.y > p2.y)
-            plot_line_high(p2, p1, img);
+            plot_line_high(p2, p1, img, data);
         else
-            plot_line_high(p1, p2, img);
+            plot_line_high(p1, p2, img, data);
     }
 }

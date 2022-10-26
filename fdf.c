@@ -15,24 +15,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int key_hook(int keycode, t_data *data);
 t_point	*parse_map(char *file);
 void	init_data(t_data *data);
 void	draw_map(t_data *data, t_img *img);
 void	free_map(t_point **map);
-
-int	close(int keycode, t_data *data)
-{
-	if (keycode == 65307)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		mlx_destroy_image(data->mlx, data->img->img);
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-		free_map(&(data->map));
-		exit(0);
-	}
-	return (0);
-}
 
 int	create_img(t_data *data)
 {
@@ -62,7 +49,7 @@ int	main(int argc, char *argv[])
 	data.heigth = 800;
 	init_data(&data);
 	create_img(&data);
-	mlx_key_hook(data.win, close, &data);
+	mlx_key_hook(data.win, key_hook, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

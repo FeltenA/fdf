@@ -16,15 +16,43 @@
 int	get_max_z(t_point *map);
 int	get_min_z(t_point *map);
 
-void	init_camera(t_cam *cam)
+int	get_max_x(t_point *map)
 {
-	cam->x = 0;
-	cam->y = 0;
-	cam->z = 0;
-	cam->rx = 0;
-	cam->ry = 0;
-	cam->rz = 0;
-	cam->fov = 1000;
+	int	max_x;
+
+	max_x = map->x;
+	while (map)
+	{
+		if (map->x > max_x)
+			max_x = map->x;
+		map = map->next;
+	}
+	return (max_x);
+}
+
+int	get_max_y(t_point *map)
+{
+	int	max_y;
+
+	max_y = map->y;
+	while (map)
+	{
+		if (map->y > max_y)
+			max_y = map->y;
+		map = map->next;
+	}
+	return (max_y);
+}
+
+void	init_camera(t_data *data)
+{
+	data->cam.x = -get_max_x(data->map);
+	data->cam.y = -get_max_y(data->map);
+	data->cam.z = get_max_x(data->map);
+	data->cam.rx = 0;
+	data->cam.ry = 0;
+	data->cam.rz = 0;
+	data->cam.fov = 1000;
 }
 
 void	init_color(t_data *data)
@@ -52,6 +80,6 @@ void	init_data(t_data *data)
 	data->min_z = get_min_z(data->map);
 	data->max_color = 0x00FF0000;
 	data->min_color = 0x000000FF;
-	init_camera(&data->cam);
+	init_camera(data);
 	init_color(data);
 }
