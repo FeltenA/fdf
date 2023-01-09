@@ -63,7 +63,20 @@ typedef struct s_data
 	int		max_color;
 	int		min_color;
 	double	color_step[3];
-	int		space;
+	double	intensity;
 }	t_data;
+
+typedef	struct s_draw_line
+{
+	t_img	*img;
+	int		x;
+	int		y;
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		error;
+	int		e2;
+} t_draw_line;
 
 #endif

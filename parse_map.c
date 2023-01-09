@@ -13,6 +13,7 @@
 #include "fdf.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 char	*get_next_line(int fd);
 void	free_map(t_point **map);
@@ -64,7 +65,8 @@ int	create_line(t_point **map, char *line, int y)
 			add_point(map, point);
 			count++;
 		}
-		i++;
+		if (line[i])
+			i++;
 	}
 	return (1);
 }
@@ -81,7 +83,11 @@ int	convert_map(t_point **map, int fd)
 	while (line)
 	{
 		if (!create_line(map, line, y))
+		{
+			free(line);
 			return (0);
+		}
+		free(line);
 		line = get_next_line(fd);
 		y++;
 	}

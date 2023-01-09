@@ -6,7 +6,8 @@ SRCS	=	fdf.c\
 			draw_line.c\
 			calculate.c\
 			get_next_line.c\
-			get_next_line_utils.c
+			get_next_line_utils.c\
+			key_hook.c
 
 OBJS	= ${SRCS:.c=.o}
 

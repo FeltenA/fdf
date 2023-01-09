@@ -20,9 +20,11 @@ void	my_mlx_pixel_put(t_img *img, t_pos pos, t_data *data)
 {
 	char	*dst;
 
-	if (pos.x < 0 || pos.x > data->width || pos.y < 0 || pos.y > data->heigth)
+	if (pos.x <= -data->width / 2 || pos.x >= data->width / 2
+		|| pos.y <= -data->heigth / 2 || pos.y >= data->heigth / 2)
 		return ;
-	dst = img->addr + (pos.y * img->line_len + pos.x * (img->bpp / 8));
+	dst = img->addr + ((pos.y + data->heigth / 2) * img->line_len
+		+ (pos.x + data->width / 2) * (img->bpp / 8));
 	*(unsigned int *) dst = pos.color;
 }
 
@@ -36,7 +38,7 @@ t_point	*get_prev_point(t_point *start, t_point *point)
 	}
 	return (0);
 }
-#include <stdio.h>
+
 void	draw_map(t_data *data, t_img *img)
 {
 	t_point	*start;
@@ -48,7 +50,6 @@ void	draw_map(t_data *data, t_img *img)
 	start = data->map;
 	while (start)
 	{
-		printf("x: %d y: %d z: %d\n", start->x, start->y, start->z);
 		if (start->next && start->y == start->next->y)
 			draw_line(calculate_pos(start, data),
 				calculate_pos(start->next, data), img, data);
