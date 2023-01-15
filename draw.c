@@ -6,7 +6,7 @@
 /*   By: afelten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:53:31 by afelten           #+#    #+#             */
-/*   Updated: 2022/10/24 14:48:29 by afelten          ###   ########.fr       */
+/*   Updated: 2023/01/15 16:53:56 by afelten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	my_mlx_pixel_put(t_img *img, t_pos pos, t_data *data)
 		|| pos.y <= -data->heigth / 2 || pos.y >= data->heigth / 2)
 		return ;
 	dst = img->addr + ((pos.y + data->heigth / 2) * img->line_len
-		+ (pos.x + data->width / 2) * (img->bpp / 8));
+			+ (pos.x + data->width / 2) * (img->bpp / 8));
 	*(unsigned int *) dst = pos.color;
 }
 

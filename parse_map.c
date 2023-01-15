@@ -6,7 +6,7 @@
 /*   By: afelten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 18:43:57 by afelten           #+#    #+#             */
-/*   Updated: 2022/10/24 14:53:22 by afelten          ###   ########.fr       */
+/*   Updated: 2023/01/15 16:54:28 by afelten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	create_line(t_point **map, char *line, int y)
 	while (line[i])
 	{
 		if ((!i || line[i - 1] == ' ') && ((line[i] >= '0' && line[i] <= '9')
-			|| line[i] == '-' || line[i] == '+'))
+				|| line[i] == '-' || line[i] == '+'))
 		{
 			point = create_point(count, y, ft_atoi_spe(line + i, &i));
 			if (!point)

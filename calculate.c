@@ -6,7 +6,7 @@
 /*   By: afelten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:36:51 by afelten           #+#    #+#             */
-/*   Updated: 2022/10/24 14:45:51 by afelten          ###   ########.fr       */
+/*   Updated: 2023/01/15 16:53:27 by afelten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	rotate_point(double *x, double *y, double *z, t_cam cam)
 	*x = result_x;
 	*y = result_y;
 }
-#include <stdio.h>
+
 t_pos	calculate_pos(t_point *point, t_data *data)
 {
 	t_pos	pos;
