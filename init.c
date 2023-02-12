@@ -15,34 +15,10 @@
 
 int	get_max_z(t_point *map);
 int	get_min_z(t_point *map);
+int	get_max_x(t_point *map);
+int	get_max_y(t_point *map);
+int	close_win(t_data *data);
 
-int	get_max_x(t_point *map)
-{
-	int	max_x;
-
-	max_x = map->x;
-	while (map)
-	{
-		if (map->x > max_x)
-			max_x = map->x;
-		map = map->next;
-	}
-	return (max_x);
-}
-
-int	get_max_y(t_point *map)
-{
-	int	max_y;
-
-	max_y = map->y;
-	while (map)
-	{
-		if (map->y > max_y)
-			max_y = map->y;
-		map = map->next;
-	}
-	return (max_y);
-}
 void	init_camera_para(t_data *data)
 {
 	int	max_y;
@@ -50,15 +26,14 @@ void	init_camera_para(t_data *data)
 
 	max = get_max_x(data->map);
 	max_y = get_max_y(data->map);
-	if (max_y > max)
-		max = max_y;
-	data->cam.x = -max - (data->max_z - data->min_z) / 3;
-	data->cam.y = -max - (data->max_z - data->min_z) / 1.5;
-	data->cam.z = 100 + 1.5 * max + (data->max_z - data->min_z);
+	data->cam.x = -max / 2;
+	data->cam.y = -max_y / 2;
+	data->cam.z = 1000 + data->max_z;
 	data->cam.rx = 0;
 	data->cam.ry = 0;
 	data->cam.rz = 0;
 	data->cam.fov = 4000;
+	data->proj = 1;
 }
 
 void	init_camera_iso(t_data *data)
@@ -77,6 +52,7 @@ void	init_camera_iso(t_data *data)
 	data->cam.ry = 0;
 	data->cam.rz = -0.3490658504;
 	data->cam.fov = 1000;
+	data->proj = 0;
 }
 
 void	init_color(t_data *data)
@@ -100,7 +76,11 @@ void	init_color(t_data *data)
 void	init_data(t_data *data)
 {
 	data->mlx = mlx_init();
+	if (!data->mlx)
+		close_win(data);
 	data->win = mlx_new_window(data->mlx, data->width, data->heigth, "fdf");
+	if (!data->win)
+		close_win(data);
 	data->img = 0;
 	data->max_z = get_max_z(data->map);
 	data->min_z = get_min_z(data->map);

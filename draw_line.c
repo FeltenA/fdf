@@ -6,7 +6,7 @@
 /*   By: afelten <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:37:07 by afelten           #+#    #+#             */
-/*   Updated: 2023/01/15 17:01:47 by afelten          ###   ########.fr       */
+/*   Updated: 2023/02/12 16:46:17 by afelten          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <math.h>
 
 void	my_mlx_pixel_put(t_img *img, t_pos pos, t_data *data);
+int		check_intersect(t_pos p1, t_pos p2, t_data *data);
+int		check_in_window(int x, int y, t_data *data);
 
 int	ft_abs(int num)
 {
@@ -45,9 +47,8 @@ t_pos	get_color(t_pos p1, t_pos p2, int x, int y)
 	new.y = y;
 	return (new);
 }
-int	check_intersect(t_pos p1, t_pos p2, t_data *data);
 
-int use_check_intersect(t_draw_line values, t_pos p2, t_data *data)
+int	use_check_intersect(t_draw_line values, t_pos p2, t_data *data)
 {
 	t_pos	p1;
 
@@ -64,11 +65,11 @@ void	plot_line(t_pos p1, t_pos p2, t_draw_line values, t_data *data)
 {
 	while (++(values.count) || 1)
 	{
-		if (!(values.x <= -data->width / 2 || values.x >= data->width / 2
-			|| values.y <= -data->heigth / 2 || values.y >= data->heigth / 2))
+		if (check_in_window(values.x, values.y, data))
 			my_mlx_pixel_put(values.img,
 				get_color(p1, p2, values.x, values.y), data);
-		if (values.x == p2.x && values.y == p2.y && !use_check_intersect(values, p2, data))
+		if (values.x == p2.x && values.y == p2.y
+			&& !use_check_intersect(values, p2, data))
 			break ;
 		values.e2 = 2 * values.error;
 		if (values.e2 >= values.dy)

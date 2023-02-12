@@ -21,6 +21,9 @@ t_point	*parse_map(char *file);
 void	init_data(t_data *data);
 void	draw_map(t_data *data, t_img *img);
 void	free_map(t_point **map);
+size_t	ft_strlen(const char *s);
+int		ft_strcmp(const char *s1, const char *s2);
+void	putstr_err(char *str);
 
 int	create_img(t_data *data)
 {
@@ -40,15 +43,25 @@ int	create_img(t_data *data)
 	return (1);
 }
 
+int	check_name(char *name)
+{
+	int	len;
+
+	len = ft_strlen(name);
+	if (!ft_strcmp(&(name[len - 4]), ".fdf"))
+		return (0);
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	if (argc != 2)
-		return (1);
+	if (argc != 2 || check_name(argv[1]))
+		putstr_err("Argument is not valid\n");
 	data.map = parse_map(argv[1]);
 	if (!data.map)
-		return (1);
+		putstr_err("Error in parsing\n");
 	data.width = 900;
 	data.heigth = 800;
 	init_data(&data);

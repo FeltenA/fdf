@@ -12,6 +12,8 @@
 
 #include <stdlib.h>
 
+size_t	ft_strlen(const char *s);
+
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	size_t	i;
@@ -28,16 +30,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	while (++i < tsize)
 		*((char *)array + i) = 0;
 	return (array);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
 }
 
 char	*ft_strjoin_free(char *s1, char *s2)

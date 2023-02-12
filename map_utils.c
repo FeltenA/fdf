@@ -13,33 +13,8 @@
 #include "fdf.h"
 #include <stdlib.h>
 
-int	get_max_z(t_point *map)
-{
-	int	max_z;
-
-	max_z = map->z;
-	while (map)
-	{
-		if (map->z > max_z)
-			max_z = map->z;
-		map = map->next;
-	}
-	return (max_z);
-}
-
-int	get_min_z(t_point *map)
-{
-	int	min_z;
-
-	min_z = map->z;
-	while (map)
-	{
-		if (map->z < min_z)
-			min_z = map->z;
-		map = map->next;
-	}
-	return (min_z);
-}
+int	get_max_z(t_point *map);
+int	get_min_z(t_point *map);
 
 void	free_map(t_point **map)
 {

@@ -7,7 +7,10 @@ SRCS	=	fdf.c\
 			calculate.c\
 			get_next_line.c\
 			get_next_line_utils.c\
-			key_hook.c
+			key_hook.c\
+			intersect.c\
+			get_values.c\
+			string_utils.c
 
 OBJS	= ${SRCS:.c=.o}
 
