@@ -6,7 +6,7 @@
 int	    create_img(t_data *data);
 void	free_map(t_point **map);
 
-void	close_win(t_data *data)
+int 	close_win(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_image(data->mlx, data->img->img);
@@ -36,17 +36,17 @@ static int  key_rotation(int keycode, t_data *data)
 
 static int  key_move(int keycode, t_data *data)
 {
-    if (keycode == 100)
-        data->cam.x += 1;
     if (keycode == 113)
+        data->cam.x += 1;
+    if (keycode == 100)
         data->cam.x -= 1;
-    if (keycode == 115)
-        data->cam.y += 1;
     if (keycode == 122)
+        data->cam.y += 1;
+    if (keycode == 115)
         data->cam.y -= 1;
-    if (keycode == 102)
-        data->cam.z += 1;
     if (keycode == 114)
+        data->cam.z += 1;
+    if (keycode == 102)
         data->cam.z -= 1;
     return (1);
 }

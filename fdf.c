@@ -16,6 +16,7 @@
 #include <stdio.h>
 
 int		key_hook(int keycode, t_data *data);
+int		close_win(t_data *data);
 t_point	*parse_map(char *file);
 void	init_data(t_data *data);
 void	draw_map(t_data *data, t_img *img);
@@ -53,6 +54,7 @@ int	main(int argc, char *argv[])
 	init_data(&data);
 	create_img(&data);
 	mlx_key_hook(data.win, key_hook, &data);
+	mlx_hook(data.win, 17, 0, close_win, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

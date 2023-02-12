@@ -77,6 +77,7 @@ typedef	struct s_draw_line
 	int		sy;
 	int		error;
 	int		e2;
+	int		count;
 } t_draw_line;
 
 #endif

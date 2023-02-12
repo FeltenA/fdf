@@ -45,14 +45,30 @@ t_pos	get_color(t_pos p1, t_pos p2, int x, int y)
 	new.y = y;
 	return (new);
 }
+int	check_intersect(t_pos p1, t_pos p2, t_data *data);
+
+int use_check_intersect(t_draw_line values, t_pos p2, t_data *data)
+{
+	t_pos	p1;
+
+	if (!(values.count % 5))
+	{
+		p1.x = values.x;
+		p1.y = values.y;
+		return (check_intersect(p1, p2, data));
+	}
+	return (0);
+}
 
 void	plot_line(t_pos p1, t_pos p2, t_draw_line values, t_data *data)
 {
-	while (1)
+	while (++(values.count) || 1)
 	{
-		my_mlx_pixel_put(values.img,
-			get_color(p1, p2, values.x, values.y), data);
-		if (values.x == p2.x && values.y == p2.y)
+		if (!(values.x <= -data->width / 2 || values.x >= data->width / 2
+			|| values.y <= -data->heigth / 2 || values.y >= data->heigth / 2))
+			my_mlx_pixel_put(values.img,
+				get_color(p1, p2, values.x, values.y), data);
+		if (values.x == p2.x && values.y == p2.y && !use_check_intersect(values, p2, data))
 			break ;
 		values.e2 = 2 * values.error;
 		if (values.e2 >= values.dy)
@@ -90,5 +106,6 @@ void	draw_line(t_pos p1, t_pos p2, t_img *img, t_data *data)
 		values.sy = -1;
 	values.dy = -ft_abs(p2.y - p1.y);
 	values.error = values.dx + values.dy;
+	values.count = -1;
 	plot_line(p1, p2, values, data);
 }

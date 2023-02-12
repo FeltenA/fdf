@@ -27,6 +27,18 @@ int	calculate_color(int z, t_data *data)
 	return (*(int *)(unsigned char [4]){b, g, r, 0});
 }
 
+/*void	rotate_iso(double *x, double *y, double *z)
+{
+	double	result_x;
+	double	result_y;
+
+	result_x = (1 / sqrt(6)) * (sqrt(3) * *x - sqrt(3) * *z);
+	result_y = (1 / sqrt(6)) * (*x + 2 * *y + *z);
+	*z = (1 / sqrt(6)) * (sqrt(2) * *x - sqrt(2) * *y + sqrt(2) * *z);
+	*y = result_y;
+	*x = result_x;
+}*/
+
 void	rotate_point(double *x, double *y, double *z, t_cam cam)
 {
 	double	result_x;

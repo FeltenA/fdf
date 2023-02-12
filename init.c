@@ -43,8 +43,25 @@ int	get_max_y(t_point *map)
 	}
 	return (max_y);
 }
+void	init_camera_para(t_data *data)
+{
+	int	max_y;
+	int	max;
 
-void	init_camera(t_data *data)
+	max = get_max_x(data->map);
+	max_y = get_max_y(data->map);
+	if (max_y > max)
+		max = max_y;
+	data->cam.x = -max - (data->max_z - data->min_z) / 3;
+	data->cam.y = -max - (data->max_z - data->min_z) / 1.5;
+	data->cam.z = 100 + 1.5 * max + (data->max_z - data->min_z);
+	data->cam.rx = 0;
+	data->cam.ry = 0;
+	data->cam.rz = 0;
+	data->cam.fov = 4000;
+}
+
+void	init_camera_iso(t_data *data)
 {
 	int	max_y;
 	int	max;
@@ -90,6 +107,6 @@ void	init_data(t_data *data)
 	data->intensity = 1.0;
 	data->max_color = 0x00FF0000;
 	data->min_color = 0x000000FF;
-	init_camera(data);
+	init_camera_iso(data);
 	init_color(data);
 }
